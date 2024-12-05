@@ -29,14 +29,14 @@ class UserInterface(QtWidgets.QMainWindow):
         vbox.addLayout(hbox5)
         vbox.addLayout(hbox6)
 
-        self.choose_order = QtWidgets.QSpinBox()
+        self.choose_order = QtWidgets.QComboBox()
+        self.choose_order.addItems(["3", "7", "13"])
         self.select = QtWidgets.QPushButton("Select")
         hbox1.addWidget(self.choose_order)
         hbox1.addWidget(self.select)
 
         self.saved = QtWidgets.QLabel("Saved")
         hbox2.addWidget(self.saved)
-        # add widget with 'saved' text after saving
 
         self.determine = QtWidgets.QPushButton("Determine rotationperiod")
         hbox3.addWidget(self.determine)
@@ -45,11 +45,22 @@ class UserInterface(QtWidgets.QMainWindow):
         hbox4.addWidget(self.graph_rot)
 
         self.value_1_line = QtWidgets.QPushButton("Calculated periods per line")
-        # give list with added points
+        # give list with added points and values
         hbox5.addWidget(self.value_1_line)
 
         self.give_answer = QtWidgets.QLabel("Mean value")
         hbox6.addWidget(self.give_answer)
+
+        self.select.clicked.connect(self.input)
+
+    def input(self):
+        order = self.select.value()
+
+        self.select_abs_line(order)
+
+    @Slot
+    def select_abs_line(self, order):
+        print(order)
 
 
 def main():
