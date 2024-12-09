@@ -241,7 +241,7 @@ class UserInterface(QtWidgets.QMainWindow):
         # print(order)
 
     def input_order(self):
-        self.w = AnotherWindow()
+        self.w = AnotherWindow(self.order, self.periods_list, self.error_periods_list)
         self.w.show()
         # pathA = self.filenameA
         # pathB = self.filenameB
