@@ -1,16 +1,14 @@
 import sys
-
 import pyqtgraph as pg
 from PySide6 import QtWidgets
 from PySide6.QtCore import Slot
-import matplotlib.pyplot as plt
+import matplotlib.pyplot as plt 
 from zonnefysica.model import fitscan
 import numpy as np
 
 # PyQtGraph global options
 pg.setConfigOption("background", "w")
 pg.setConfigOption("foreground", "k")
-
 
 class UserInterface(QtWidgets.QMainWindow):
     def __init__(self):
