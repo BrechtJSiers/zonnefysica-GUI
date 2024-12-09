@@ -61,6 +61,7 @@ class UserInterface(QtWidgets.QMainWindow):
     @Slot()
     def select_abs_line(self, order):
         print(order)
+    
 
 
 def main():
