@@ -222,7 +222,7 @@ def fitscan(order_N, range_1_A, range_2_A, range_1_B, range_2_B):
 
     popt_B, pcov_B = curve_fit(normal_distribution, fit_B_wavelength, fit_B_intensity, p0=[1, (range_1_B+range_2_B)/2, 1], sigma=fit_B_error)
 
-    return popt_A, pcov_A, popt_B, pcov_B
+    return popt_A, pcov_A, popt_B, pcov_B, wavelength_object, flux_object_norm_A, flux_object_norm_B, SNR_A, SNR_B, fit_A_wavelength, fit_B_wavelength, normal_distribution
 
 
 range_1_A = 6561.83 
@@ -230,9 +230,8 @@ range_2_A = 6563.63
 range_1_B = 6561.89 
 range_2_B = 6563.68 
 
-popt_A, pcov_A, popt_B, pcov_B = fitscan(3, range_1_A, range_2_A, range_1_B, range_2_B)
+popt_A, pcov_A, popt_B, pcov_B, wavelength_object, flux_object_norm_A, flux_object_norm_B, SNR_A, SNR_B, fit_A_wavelength, fit_B_wavelength, normal_distribution= fitscan(3, range_1_A, range_2_A, range_1_B, range_2_B)
 
-'''
 
 def plot():
 
@@ -252,4 +251,4 @@ def plot():
     plt.xlim(range_1_A - 0.5, range_2_A + 0.5)
     plt.legend(loc=2, prop={'size': 6})
     plt.show()
-'''
+
