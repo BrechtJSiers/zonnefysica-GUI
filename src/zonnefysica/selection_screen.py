@@ -45,7 +45,7 @@ class UserInterface(QtWidgets.QMainWindow):
         range_1_B = 6561.89 
         range_2_B = 6563.68 
 
-        popt_A, pcov_A, popt_B, pcov_B, wavelength_object, flux_object_norm_A, flux_object_norm_B, SNR_A, SNR_B, fit_A_wavelength, fit_B_wavelength, normal_distribution = fitscan(3, range_1_A, range_2_A, range_1_B, range_2_B)
+        popt_A, pcov_A, popt_B, pcov_B, wavelength_object, flux_object_norm_A, flux_object_norm_B, SNR_A, SNR_B, fit_A_wavelength, fit_B_wavelength, normal_distribution = fitscan(order, range_1_A, range_2_A, range_1_B, range_2_B)
         self.plot_widget.plot(wavelength_object, flux_object_norm_A, linewidth=1, pen= 'r', name="Dataset A")
         self.plot_widget.plot(wavelength_object, flux_object_norm_B, linewidth=1, pen = 'b', name="Dataset B")
 

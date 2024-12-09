@@ -5,7 +5,7 @@ from scipy.optimize import curve_fit
 from zonnefysica.controller import data_A, data_B
 
 
-def fitscan(order_N, range_1_A, range_2_A, range_1_B, range_2_B):
+def initial_scan(order_N):
     data_order_N_A = data_A(order_N)
     data_order_N_B = data_B(order_N)
 
@@ -195,7 +195,10 @@ def fitscan(order_N, range_1_A, range_2_A, range_1_B, range_2_B):
     flux_object_norm_B = (flux_object_B - dark_B) / (
         (tungstenflat_B - darkflat_B) * normalisation_fit_B
     )
+    return wavelength_object, flux_object_norm_A, flux_object_norm_B, SNR_A, SNR_B
 
+def fitscan(order_N, range_1_A, range_2_A, range_1_B, range_2_B):
+    wavelength_object, flux_object_norm_A, flux_object_norm_B, SNR_A, SNR_B = initial_scan(order_N)
     fit_A_wavelength = []
     fit_A_intensity = []
     fit_B_wavelength = []
@@ -236,35 +239,5 @@ def fitscan(order_N, range_1_A, range_2_A, range_1_B, range_2_B):
         sigma=fit_B_error,
     )
 
-    return popt_A, pcov_A, popt_B, pcov_B, wavelength_object, flux_object_norm_A, flux_object_norm_B, SNR_A, SNR_B, fit_A_wavelength, fit_B_wavelength, normal_distribution
+    return popt_A, pcov_A, popt_B, pcov_B, fit_A_wavelength, fit_B_wavelength, normal_distribution
 
-
-range_1_A = 6561.83
-range_2_A = 6563.63
-range_1_B = 6561.89
-range_2_B = 6563.68
-
-popt_A, pcov_A, popt_B, pcov_B, wavelength_object, flux_object_norm_A, flux_object_norm_B, SNR_A, SNR_B, fit_A_wavelength, fit_B_wavelength, normal_distribution= fitscan(3, range_1_A, range_2_A, range_1_B, range_2_B)
-
-"""
-
-def plot():
-
-    plt.plot(wavelength_object, flux_object_norm_A, linewidth=1, label="Dataset A")
-    plt.plot(wavelength_object, flux_object_norm_B, linewidth=1, label="Dataset B")
-
-
-    plt.plot(wavelength_object, (normal_distribution(wavelength_object, popt_A[0], popt_A[1], popt_A[2])), label='Gaussian fitfunction')
-    plt.plot(wavelength_object, (normal_distribution(wavelength_object, popt_B[0], popt_B[1], popt_B[2])), label='Gaussian fitfunction')
-
-
-    plt.errorbar(wavelength_object, flux_object_norm_A, yerr=flux_object_norm_A/SNR_A, markersize='1', fmt='.', ecolor='red', elinewidth=0.5)
-    plt.errorbar(wavelength_object, flux_object_norm_B, yerr=flux_object_norm_B/SNR_B, markersize='1', fmt='.', ecolor='red', elinewidth=0.5)
-    plt.ylim(0,)
-    plt.xlabel('Wavelength (Angstrom)')
-    plt.ylabel("Normalized intensity")
-    plt.xlim(range_1_A - 0.5, range_2_A + 0.5)
-    plt.legend(loc=2, prop={'size': 6})
-    plt.show()
-
-"""
