@@ -5,6 +5,7 @@ from PySide6.QtCore import Slot
 import matplotlib.pyplot as plt 
 from zonnefysica.model import fitscan
 import numpy as np
+from zonnefysica.GUI import UserInterface
 
 # PyQtGraph global options
 pg.setConfigOption("background", "w")
@@ -63,7 +64,7 @@ class UserInterface(QtWidgets.QMainWindow):
 
 
 
-from zonnefysica.GUI import UserInterface
+
 
 
 def main():
