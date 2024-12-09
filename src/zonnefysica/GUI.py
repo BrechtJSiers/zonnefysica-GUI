@@ -9,6 +9,20 @@ pg.setConfigOption("background", "w")
 pg.setConfigOption("foreground", "k")
 
 
+class AnotherWindow(QtWidgets.QWidget):
+    """
+    This "window" is a QWidget. If it has no parent, it
+    will appear as a free-floating window as we want.
+    """
+
+    def __init__(self):
+        super().__init__()
+        layout = QtWidgets.QVBoxLayout()
+        self.label = QtWidgets.QLabel("Another Window")
+        layout.addWidget(self.label)
+        self.setLayout(layout)
+
+
 class UserInterface(QtWidgets.QMainWindow):
     def __init__(self):
         super().__init__()
@@ -54,8 +68,10 @@ class UserInterface(QtWidgets.QMainWindow):
         self.select.clicked.connect(self.input)
 
     def input(self):
-        order = self.choose_order.currentText()
-        print(order)
+        self.w = AnotherWindow()
+        self.w.show()
+        # order = self.choose_order.currentText()
+        # print(order)
 
     @Slot()
     def select_abs_line(self, order):
