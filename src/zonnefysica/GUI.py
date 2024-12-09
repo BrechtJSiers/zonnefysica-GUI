@@ -54,14 +54,12 @@ class UserInterface(QtWidgets.QMainWindow):
         self.select.clicked.connect(self.input)
 
     def input(self):
-        order = self.choose_order.value()
+        order = self.choose_order.currentText()
         print(order)
-        self.select_abs_line(order)
 
     @Slot()
     def select_abs_line(self, order):
         print(order)
-    
 
 
 def main():
