@@ -10,10 +10,6 @@ pg.setConfigOption("foreground", "k")
 
 
 class AnotherWindow(QtWidgets.QWidget):
-    """
-    This "window" is a QWidget. If it has no parent, it
-    will appear as a free-floating window as we want.
-    """
 
     def __init__(self):
         super().__init__()
@@ -43,9 +39,13 @@ class UserInterface(QtWidgets.QMainWindow):
         vbox.addLayout(hbox5)
         vbox.addLayout(hbox6)
 
+        self.pathA = QtWidgets.QPushButton("Choose pathA")
+        self.pathB = QtWidgets.QPushButton("Choose pathB")
         self.choose_order = QtWidgets.QComboBox()
         self.choose_order.addItems(["3", "7", "13"])
         self.select = QtWidgets.QPushButton("Select")
+        hbox1.addWidget(self.pathA)
+        hbox1.addWidget(self.pathB)
         hbox1.addWidget(self.choose_order)
         hbox1.addWidget(self.select)
 
@@ -58,20 +58,30 @@ class UserInterface(QtWidgets.QMainWindow):
         self.graph_rot = pg.PlotWidget()
         hbox4.addWidget(self.graph_rot)
 
-        self.value_1_line = QtWidgets.QPushButton("Calculated periods per line")
-        # give list with added points and values
-        hbox5.addWidget(self.value_1_line)
+        # self.value_1_line = QtWidgets.QPushButton("Calculated periods per line")
+        # # give list with added points and values
+        # hbox5.addWidget(self.value_1_line)
 
         self.give_answer = QtWidgets.QLabel("Mean value")
         hbox6.addWidget(self.give_answer)
 
-        self.select.clicked.connect(self.input)
+        self.select.clicked.connect(self.input_order)
+        self.pathA.clicked.connect(self.select_pathA)
+        self.pathB.clicked.connect(self.select_pathB)
 
-    def input(self):
+    def input_order(self):
         self.w = AnotherWindow()
         self.w.show()
-        # order = self.choose_order.currentText()
-        # print(order)
+        # pathA = self.filenameA
+        # pathB = self.filenameB
+
+    def select_pathA(self):
+        self.filenameA = QtWidgets.QFileDialog.getExistingDirectory()
+        print(self.filenameA)
+
+    def select_pathB(self):
+        self.filenameB = QtWidgets.QFileDialog.getExistingDirectory()
+        print(self.filenameB)
 
     @Slot()
     def select_abs_line(self, order):
