@@ -1,3 +1,4 @@
+<<<<<<< Updated upstream
 import sys
 import pyqtgraph as pg
 from PySide6 import QtWidgets
@@ -81,3 +82,5 @@ print(int(waarde))
 
 if __name__ == "__main__":
     main()
+=======
+>>>>>>> Stashed changes
